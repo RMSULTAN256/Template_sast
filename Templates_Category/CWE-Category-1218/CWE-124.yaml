@@ -1,0 +1,34 @@
+id: CWE-124
+
+info:
+  name: Buffer Underwrite ('Buffer Underflow')
+  author: Team Menkrep
+  severity: HIGH
+  description: The software accesses memory outside the allocated buffer's start, typically by using improper pointer arithmetic or negative indices.
+  reference:
+    - https://cwe.mitre.org/data/definitions/124.html
+    - https://nvd.nist.gov/vuln/detail/CVE-2023-25610
+
+  classification:
+    cvss-metrics: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H
+    cvss-score: 9.8
+    cve-id:  CVE-2023-25610
+  tags: c, c++, code, cwe, cve
+
+file:
+  - extensions:
+      - .c
+      - .c++
+
+    matchers:
+      - type: regex
+        regex:
+          - while\s*\(\s*isspace\(\s*\w+\[\s*\w+\s*\]\s*\)\s*\)
+          - \w+\s*\[\s*-\s*\d+\s*\]
+
+    extractors:
+      - type: regex
+        name: .c Using strcpy illegal variabel
+        regex:
+          - while\s*\(\s*isspace\(\s*\w+\[\s*\w+\s*\]\s*\)\s*\)
+          - \w+\s*\[\s*-\s*\d+\s*\]

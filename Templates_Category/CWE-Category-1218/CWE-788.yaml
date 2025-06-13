@@ -1,0 +1,35 @@
+id: CWE-788
+
+info:
+  name: Access of Memory Location After End of Buffer
+  author: Team Menkrep
+  severity: HIGH
+  description: TThe product reads or writes to a buffer using an index or pointer that references a memory location after the end of the buffer.
+  reference:
+    - https://cwe.mitre.org/data/definitions/788.html
+    - https://nvd.nist.gov/vuln/detail/cve-2021-40727
+
+  classification:
+    cvss-metrics: CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H
+    cvss-score: 7.8
+    cve-id:  CVE-2021-40727
+  tags: c, c++, code, cwe, cve
+
+file:
+  - extensions:
+      - .c
+      - .cpp
+      - .cc
+
+    matchers:
+      - type: regex
+        regex:
+          - for\s*\(.*?;\s*\w+\s*<=\s*[a-zA-Z_]\w*\s*;.*?\)
+
+    extractors:
+      - type: regex
+        name: No bound checking
+        regex:
+          - for\s*\(.*?;\s*\w+\s*<=\s*[a-zA-Z_]\w*\s*;.*?\)
+
+comments: "still in progress (False Positive)"

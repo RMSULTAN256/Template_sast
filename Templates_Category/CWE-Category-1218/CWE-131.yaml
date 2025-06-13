@@ -1,0 +1,33 @@
+id: CWE-131
+
+info:
+  name: Incorrect Calculation of Buffer Size
+  author: Team Menkrep
+  severity: HIGH
+  description: The product does not correctly calculate the size to be used when allocating a buffer, which could lead to a buffer overflow.
+  reference:
+    - https://cwe.mitre.org/data/definitions/131.html
+    - https://nvd.nist.gov/vuln/detail/CVE-2024-46585
+
+  classification:
+    cvss-metrics: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H
+    cvss-score: 7.5
+    cve-id:  CVE-2024-46585
+  tags: c, c++, code, cwe, cve
+
+file:
+  - extensions:
+      - .c
+      - .cpp
+      - .cc
+
+    matchers:
+      - type: regex
+        regex:
+          - '\bmalloc\(\d*\)'
+
+    extractors:
+      - type: regex
+        name: strcpy-usage
+        regex:
+          - '\bmalloc\(\d*\)'

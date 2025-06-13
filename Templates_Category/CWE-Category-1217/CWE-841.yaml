@@ -1,0 +1,34 @@
+id: CWE-841
+
+info:
+  name: Improper Enforcement of Behavioral Workflow
+  author: Team Menkrep
+  severity: high
+  description: |
+    The product supports a session in which more than one behavior must be performed 
+    by an actor, but it does not properly ensure that the actor performs the behaviors 
+    in the required sequence.
+  reference:
+    - https://cwe.mitre.org/data/definitions/841.html
+    - https://nvd.nist.gov/vuln/detail/CVE-2024-12543
+
+  classification:
+    cvss-metrics: CVSS:4.0/AV:N/AC:H/AT:P/PR:H/UI:N/VC:L/VI:H/VA:N/SC:N/SI:N/SA:N
+    cvss-score: 5.9
+    cve-id: CVE-2024-12543
+  tags: python, code, cwe, cve
+
+file:
+  - extensions:
+      - .py
+
+    matchers:
+      - type: regex
+        regex:
+          - if(\s*command|Command)\s*==\s*(?:.*['"]Login\s*['"]|\s*['"]Retrieve_file['"])
+
+    extractors:
+      - type: regex
+        name: .php; allowing stolen cookies to remain valid for too long
+        regex:
+          - if(\s*command|Command)\s*==\s*(?:.*['"]Login\s*['"]|\s*['"]Retrieve_file['"])
