@@ -1,6 +1,9 @@
-.git
-.vscode
-guesslang
-nuclei
-Sast-Template
-nuclei-templates
+.ipynb_checkpoints/
+.vscode/
+
+AI/
+SH/
+Template_sast/
+pyth/
+
+*.py

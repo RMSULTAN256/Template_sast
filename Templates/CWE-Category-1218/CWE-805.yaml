@@ -1,0 +1,32 @@
+id: CWE-805
+
+info:
+  name: Buffer Access with Incorrect Length Value
+  author: Team Menkrep
+  severity: HIGH
+  description: The product uses a sequential operation to read or write a buffer, but it uses an incorrect length value that causes it to access memory that is outside of the bounds of the buffer.
+  reference:
+    - https://cwe.mitre.org/data/definitions/805.html
+    - https://nvd.nist.gov/vuln/detail/CVE-2024-24851
+
+  classification:
+    cvss-metrics: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H
+    cvss-score: 7.5
+    cve-id:  CVE-2025-20169
+  tags: c, c++, code, cwe, cve
+
+file:
+  - extensions:
+      - .c
+      - .c++
+
+    matchers:
+      - type: regex
+        regex:
+          - \bstrncpy\s*\(\s*(\w+)\s*,\s*(\w+)\s*,(\s*strlen\([^)]*\)|\s*sizeof\([^)]*\))\);
+
+    extractors:
+      - type: regex
+        name: buffer write
+        regex:
+          - \bstrncpy\s*\(\s*(\w+)\s*,\s*(\w+)\s*,(\s*strlen\([^)]*\)|\s*sizeof\([^)]*\))\);

@@ -5,9 +5,6 @@ info:
   author: Team Menkrep
   severity: HIGH
   description: The product copies an input buffer to an output buffer without verifying that the size of the input buffer is less than the size of the output buffer, leading to a buffer overflow.
-  summary: >
-    This rule identifies potentially unsafe usage of 'strcpy' and 'gets' functions
-    in C/C++ source code, which can result in buffer overflows if input sizes are not validated.
   reference:
     - https://cwe.mitre.org/data/definitions/120.html
     - https://nvd.nist.gov/vuln/detail/CVE-2024-46585
@@ -24,21 +21,19 @@ file:
       - .cpp
       - .cc
 
-    matchers-condition: or
-
     matchers:
       - type: regex
         regex:
-          - '\bstrcpy\s*\([^)]*\)'
-          - '\bgets\s*\([^)]*\)'
+          - \bstrcpy\s*\(\s*([^,]+?)\s*,\s*([^)]+?)\s*\)
+          - ^(\s*gets\(([^)]*\))\S)
 
     extractors:
       - type: regex
         name: strcpy-usage
         regex:
-          - '\bstrcpy\s*\([^)]*\)'
+          - \bstrcpy\s*\(\s*([^,]+?)\s*,\s*([^)]+?)\s*\)
 
       - type: regex
-        name: gets-usage
+        name: .c Reads inputs from stdin
         regex:
-          - '\bgets\s*\([^)]*\)'
+          - ^(\s*gets\(([^)]*\))\S)

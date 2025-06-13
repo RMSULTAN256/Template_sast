@@ -24,14 +24,11 @@ file:
       - type: regex
         regex:
           - while\s*\(\s*isspace\(\s*\w+\[\s*\w+\s*\]\s*\)\s*\)
+          - \w+\s*\[\s*-\s*\d+\s*\]
 
     extractors:
       - type: regex
         name: .c Using strcpy illegal variabel
         regex:
           - while\s*\(\s*isspace\(\s*\w+\[\s*\w+\s*\]\s*\)\s*\)
-
-      - type: regex
-        name: .c Reads inputs from stdin
-        regex:
-          - ^(\s*gets\(([^)]*\))\S)
+          - \w+\s*\[\s*-\s*\d+\s*\]
